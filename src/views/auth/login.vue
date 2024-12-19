@@ -1,26 +1,54 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import validate from '@/plugins/validate'
+const { Form, Field, ErrorMessage } = validate
 
-const form = reactive({
-  account: '',
-  password: ''
+const Schema = validate.yup.object({
+  username: validate.yup.string().required().email().label('账号'),
+  password: validate.yup
+    .string()
+    .required()
+    .min(6, '密码长度最小不少于6个字符')
+    .label('密码')
 })
+
+const onSubmit = (values: Record<string, any>) => {
+  console.log(values)
+}
 </script>
 
 <template>
   <div class="login-content">
-    <div class="login-form">
+    <Form
+      class="login-form"
+      @submit="onSubmit"
+      :validation-schema="Schema">
       <h2 class="login-title">通用后台系统脚手架</h2>
       <div class="mt-12">
-        <input
-          type="text"
-          placeholder="请输入邮箱账号"
-          class="login-input" />
+        <div class="relative">
+          <Field
+            name="username"
+            type="text"
+            placeholder="请输入邮箱账号"
+            class="login-input" />
 
-        <input
-          type="text"
-          placeholder="请输入账号密码"
-          class="login-input mt-6" />
+          <ErrorMessage
+            class="text-sm text-red-800 absolute -bottom-5 left-2"
+            name="username"
+            as="div" />
+        </div>
+
+        <div class="relative">
+          <Field
+            name="password"
+            type="password"
+            placeholder="请输入账号密码"
+            class="login-input mt-6" />
+
+          <ErrorMessage
+            class="text-sm text-red-800 absolute -bottom-5 left-2"
+            name="password"
+            as="div" />
+        </div>
       </div>
 
       <button class="login-btn">登录</button>
@@ -28,7 +56,7 @@ const form = reactive({
       <div class="mt-6 flex justify-center items-center">
         <p class="login-info">还没有账号？前往注册 ~</p>
       </div>
-    </div>
+    </Form>
   </div>
 </template>
 
