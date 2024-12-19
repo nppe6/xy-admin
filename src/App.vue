@@ -1,13 +1,4 @@
-<script setup lang="ts">
-import { getInfo } from './apis/user'
-
-const info = async () => {
-  const res = await getInfo()
-  console.log('res: ', res.data.name)
-}
-
-info()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <router-view></router-view>
