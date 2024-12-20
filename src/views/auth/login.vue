@@ -22,7 +22,7 @@ const onSubmit = async (values: Record<string, any>) => {
   } = await axiosLogin(values)
 
   store.set('token', {
-    expire: 5,
+    expire: 1000,
     token
   })
 
