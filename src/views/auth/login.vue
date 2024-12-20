@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { axiosLogin } from '@/apis/user'
 import validate from '@/plugins/validate'
+import { store } from '@/utils'
 const { Form, Field, ErrorMessage } = validate
 
 const Schema = validate.yup.object({
@@ -11,8 +13,15 @@ const Schema = validate.yup.object({
     .label('密码')
 })
 
-const onSubmit = (values: Record<string, any>) => {
-  console.log(values)
+const onSubmit = async (values: Record<string, any>) => {
+  const {
+    data: { token }
+  } = await axiosLogin(values)
+
+  store.set('token', {
+    expire: 100,
+    token
+  })
 }
 </script>
 
@@ -27,6 +36,7 @@ const onSubmit = (values: Record<string, any>) => {
         <div class="relative">
           <Field
             name="username"
+            value="admin@123.com"
             type="text"
             placeholder="请输入邮箱账号"
             class="login-input" />
@@ -40,6 +50,7 @@ const onSubmit = (values: Record<string, any>) => {
         <div class="relative">
           <Field
             name="password"
+            value="admin888"
             type="password"
             placeholder="请输入账号密码"
             class="login-input mt-6" />
