@@ -4,3 +4,8 @@
     @apply bg-sky-700 hover:!bg-sky-500;
   }
 }
+
+//定义侧边栏 是折叠样式 以及 固定样式 
+.xy-menu-warp-fixed{
+  @apply  fixed left-0 top-0 w-[inherit] overflow-hidden;
+}
