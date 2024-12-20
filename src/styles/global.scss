@@ -1,0 +1,6 @@
+.xy-button{
+  @apply py-2 px-4 bg-violet-700 w-full text-white rounded-md hover:bg-violet-500 duration-300;
+  &.xy-danger{
+    @apply bg-sky-700 hover:!bg-sky-500;
+  }
+}

@@ -4,3 +4,9 @@
 </template>
 
 <style scoped></style>
+
+<script>
+export default {
+  route: { meta: { auth: true } }
+}
+</script>

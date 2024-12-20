@@ -34,6 +34,7 @@
     "vite.config.ts",
     "vite/**/*.ts",
     "types/vite-env.d.ts",
-    "types/**/*.d.ts"
+    "types/**/*.d.ts",
+    "types/**/*.ts"
   ]
 }
