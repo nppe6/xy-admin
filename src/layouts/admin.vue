@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import MenuComponents from '@/layouts/components/menu.vue'
+import NavbarComponents from './components/navbar.vue'
 </script>
 <template>
   <div class="admin flex">
     <MenuComponents />
-    <div class="admin-main"><router-view></router-view></div>
+    <div class="admin-main">
+      <NavbarComponents class="admin-navbar" />
+      <div class="admin-content">
+        <router-view></router-view>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -12,6 +18,14 @@ import MenuComponents from '@/layouts/components/menu.vue'
 .admin {
   .admin-main {
     @apply flex-grow bg-[#f6f6f8];
+
+    .admin-navbar {
+      @apply fixed right-0 top-0 z-10 w-[calc(100%-208px)];
+    }
+
+    .admin-content {
+      @apply pt-24 p-6;
+    }
   }
 }
 </style>

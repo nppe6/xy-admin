@@ -18,71 +18,6 @@ const menus = reactive<IMenu[]>([
     children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
   },
   {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
     title: '编辑器',
     icon: 'fas fa-pen-to-square',
     children: [{ title: '富文本编辑器' }, { title: 'markdown编辑器' }]
@@ -146,10 +81,10 @@ const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
 
 <style scoped lang="scss">
 .admin-menu {
-  @apply flex-shrink-0 w-[208px] bg-white min-h-screen;
+  @apply flex-shrink-0 w-[208px] bg-white dark:bg-[#0a0a0a] min-h-screen;
 
   .admin-menu-warp {
-    @apply text-gray-900 h-full flex flex-col;
+    @apply text-gray-900 dark:text-white h-full flex flex-col;
 
     .menu-header {
       @apply flex-shrink-0 py-4 border-b;
@@ -166,7 +101,7 @@ const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
       }
     }
     .menu-main {
-      @apply flex-grow overflow-x-hidden overflow-y-auto p-2;
+      @apply flex-grow overflow-x-hidden overflow-y-auto;
 
       &::-webkit-scrollbar {
         width: 5px;
@@ -188,16 +123,16 @@ const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
       }
 
       dl {
-        @apply text-gray-900 text-sm;
+        @apply text-gray-900 dark:text-white text-sm;
 
         dt {
-          @apply text-[16px] mt-6 py-1 flex justify-between items-center cursor-pointer;
+          @apply text-[16px] mt-6 py-3 px-3  flex justify-between items-center cursor-pointer rounded-md duration-300 hover:bg-[#f0f0f1] dark:hover:bg-zinc-600;
         }
 
         dd {
-          @apply py-3 pl-4 my-2 cursor-pointer rounded-md duration-300 hover:bg-[#f0f0f1];
+          @apply py-3 pl-8 my-2 cursor-pointer rounded-md duration-300 hover:bg-[#f0f0f1] dark:hover:bg-zinc-600;
           &.active {
-            @apply bg-[#f0f0f1] text-blue-700;
+            @apply bg-[#f0f0f1] dark:bg-zinc-600 text-blue-700;
           }
         }
       }

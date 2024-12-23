@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <div>admin-home.vue</div>
+  <div>11</div>
 </template>
 
 <style scoped></style>

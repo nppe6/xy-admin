@@ -3,6 +3,7 @@ import App from './App.vue'
 import router, { setupRouter } from '@/router'
 import { setupPlugins } from './plugins'
 import '@/styles/global.scss'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 async function bootstrap() {
   const app = createApp(App)
