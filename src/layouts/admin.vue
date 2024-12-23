@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MenuComponents from '@/layouts/components/menu.vue'
 import NavbarComponents from './components/navbar.vue'
+import HistoryLink from './components/historyLink.vue'
 </script>
 <template>
   <div class="admin flex">
@@ -8,7 +9,10 @@ import NavbarComponents from './components/navbar.vue'
     <div class="admin-main">
       <NavbarComponents class="admin-navbar" />
       <div class="admin-content">
-        <router-view></router-view>
+        <HistoryLink />
+        <div class="p-5 bg-white">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -24,7 +28,7 @@ import NavbarComponents from './components/navbar.vue'
     }
 
     .admin-content {
-      @apply pt-24 p-6;
+      @apply pt-20 p-6;
     }
   }
 }
