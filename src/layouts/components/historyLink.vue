@@ -18,7 +18,7 @@ const links = reactive<{ title: string }[]>([
 </script>
 
 <template>
-  <div class="my-3 grid grid-flow-col gap-2 justify-start">
+  <div class="hidden my-3 md:grid grid-flow-col gap-2 justify-start">
     <a
       href="#"
       v-for="(ele, index) of links"

@@ -62,7 +62,9 @@ const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
               <span>{{ item.title }}</span>
             </section>
             <section>
-              <i class="fas fa-angle-down text-[16px]"></i>
+              <i
+                class="fas fa-angle-down text-[16px] duration-300"
+                :class="{ ' rotate-180': item.active }"></i>
             </section>
           </dt>
           <dd
