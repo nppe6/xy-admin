@@ -10,7 +10,7 @@ import HistoryLink from './components/historyLink.vue'
       <NavbarComponents class="admin-navbar" />
       <div class="admin-content">
         <HistoryLink />
-        <div class="p-5 bg-white">
+        <div>
           <router-view></router-view>
         </div>
       </div>
@@ -21,7 +21,7 @@ import HistoryLink from './components/historyLink.vue'
 <style scoped lang="scss">
 .admin {
   .admin-main {
-    @apply flex-grow bg-[#f6f6f8];
+    @apply flex-grow bg-[#f6f6f8] dark:bg-[#0a0a0a];
 
     .admin-navbar {
       @apply fixed right-0 top-0 z-10 w-[calc(100%-208px)];

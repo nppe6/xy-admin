@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="bg-white dark:bg-[#0a0a0a] p-4 flex justify-between items-center">
+  <div class="bg-white dark:bg-[#151518] p-4 flex justify-between items-center">
     <el-breadcrumb
       separator="/"
       class="dark:text-white">

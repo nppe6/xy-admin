@@ -81,7 +81,7 @@ const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
 
 <style scoped lang="scss">
 .admin-menu {
-  @apply flex-shrink-0 w-[208px] bg-white dark:bg-[#0a0a0a] min-h-screen;
+  @apply flex-shrink-0 w-[208px] bg-white dark:bg-[#151518] min-h-screen;
 
   .admin-menu-warp {
     @apply text-gray-900 dark:text-white h-full flex flex-col;

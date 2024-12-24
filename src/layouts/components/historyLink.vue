@@ -23,7 +23,7 @@ const links = reactive<{ title: string }[]>([
       href="#"
       v-for="(ele, index) of links"
       :key="index"
-      class="px-3 py-2 bg-white dark:bg-[#0a0a0a] rounded-md text-sm text-gray-800 dark:text-white">
+      class="px-3 py-2 bg-white dark:bg-[#151518] rounded-md text-sm text-gray-800 dark:text-white">
       <span>{{ ele.title }}</span>
       <i class="fas fa-xmark ml-2"></i>
     </a>
