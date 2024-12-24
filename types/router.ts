@@ -7,5 +7,9 @@ declare module 'vue-router' {
   interface RouteMeta {
     auth?: boolean
     guest?: boolean
+    // 路由是否在菜单显示
+    show?: boolean
+    title?: string
+    icon?: string
   }
 }
