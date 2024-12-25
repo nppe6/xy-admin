@@ -3,9 +3,14 @@ import { RouteRecordRaw } from 'vue-router'
 export default {
   name: 'error',
   path: '/error',
-  component: () => import('@/layouts/error.vue'),
+  component: () => import('@/layouts/admin.vue'),
   // 定义菜单源信息
-  meta: { title: '错误页面', icon: 'fas fa-file-excel', show: true },
+  meta: {
+    title: '错误页面',
+    icon: 'fas fa-file-excel',
+    show: true,
+    auth: true
+  },
   children: [
     {
       name: 'error-404',

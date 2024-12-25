@@ -8,7 +8,8 @@ export default {
     {
       name: 'login',
       path: 'login',
-      component: () => import('@/views/auth/login.vue')
+      component: () => import('@/views/auth/login.vue'),
+      meta: { guest: true }
     }
   ]
 } as RouteRecordRaw

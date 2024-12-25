@@ -1,32 +1,10 @@
 <script setup lang="ts">
 import { router } from '@/store/router'
 import { reactive } from 'vue'
-import { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
+import { RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router'
 
 const routerStore = router()
-
-// interface IMenuItem {
-//   title: string
-//   icon?: string
-//   active?: boolean
-// }
-
-// interface IMenu extends IMenuItem {
-//   children?: IMenuItem[]
-// }
-
-// const menus = reactive<IMenu[]>([
-//   {
-//     title: '错误页面',
-//     icon: 'fas fa-file-excel',
-//     children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-//   },
-//   {
-//     title: '编辑器',
-//     icon: 'fas fa-pen-to-square',
-//     children: [{ title: '富文本编辑器' }, { title: 'markdown编辑器' }]
-//   }
-// ])
+const routers = useRouter()
 
 const resetMenus = () => {
   routerStore.routes.forEach((pRoute) => {
@@ -50,6 +28,7 @@ const handleClick = (
       resetMenus()
       pRoute.meta.isActive = true
       cRoute.meta.isActive = true
+      routers.push(cRoute)
     }
   } else {
     if (pRoute.meta.isActive) {
