@@ -1,3 +1,4 @@
+import user from '@/store/user'
 import { store } from '@/utils'
 import {
   RouteLocationNormalizedGeneric,
@@ -14,13 +15,18 @@ class Guard {
     this.router.beforeEach(this.beforeEach.bind(this))
   }
 
-  private beforeEach(
+  private async beforeEach(
     to: RouteLocationNormalizedGeneric,
     from: RouteLocationNormalizedLoadedGeneric
   ) {
     if (this.isLogin(to) === false) return { name: 'login' }
-
     if (this.isGuest(to) === false) return from
+
+    await this.getUserInfo()
+  }
+
+  private getUserInfo() {
+    if (this.token()) return user().axiosUserInfo()
   }
 
   private token(): string | null {

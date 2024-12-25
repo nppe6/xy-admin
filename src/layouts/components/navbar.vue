@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import user from '@/store/user'
+
+const userStore = user()
+</script>
 
 <template>
   <div class="bg-white dark:bg-[#151518] p-4 flex justify-between items-center">
@@ -20,7 +24,7 @@
       <div>
         <el-dropdown trigger="click">
           <img
-            src="/src/assets/image/01.jpg"
+            :src="userStore.info?.avatar"
             alt=""
             class="w-10 h-10 rounded-full object-cover" />
           <template #dropdown>
@@ -35,7 +39,7 @@
       <div>
         <span
           class="text-[16px] text-gray-600 dark:text-white truncate max-w-[8ch]"
-          >萧先生</span
+          >{{ userStore.info?.name }}</span
         >
       </div>
     </div>

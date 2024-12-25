@@ -1,6 +1,6 @@
 import http from '@/plugins/axios'
 
-interface InfoInterface {
+export interface InfoInterface {
   name: string
   age: number
   avatar: string
@@ -8,11 +8,11 @@ interface InfoInterface {
 
 export async function getInfo() {
   return http.request<InfoInterface>({
-    url: 'info'
+    url: 'user/info'
   })
 }
 
-interface LoginInterface {
+export interface LoginInterface {
   token: string
 }
 
