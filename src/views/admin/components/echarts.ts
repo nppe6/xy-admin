@@ -47,4 +47,35 @@ function getOptions(data: { dates: string[]; values: number[] }) {
   }
 }
 
-export { weekData, monthData, getOptions }
+// 图表配置
+const getOptionsInfo = (data: { dates: string[]; values: number[] }) => ({
+  title: {
+    text: '环形图标题',
+    left: 'center',
+    top: 'center',
+    textStyle: {
+      fontSize: 14,
+      color: '#333'
+    }
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  series: [
+    {
+      name: '访问量',
+      type: 'pie',
+      radius: ['70%', '90%'], // 内外圆半径
+      avoidLabelOverlap: false,
+      label: {
+        show: false // 隐藏标签
+      },
+      data: data.values.map((value, index) => ({
+        value,
+        name: data.dates[index]
+      }))
+    }
+  ]
+})
+
+export { weekData, monthData, getOptions, getOptionsInfo }

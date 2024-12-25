@@ -8,8 +8,8 @@ import HistoryLink from './components/historyLink.vue'
     <MenuComponents class="hidden md:block" />
     <div class="admin-main">
       <NavbarComponents class="admin-navbar" />
+      <HistoryLink class="fixed right-0 top-[72px] z-10 w-[calc(100%-208px)]" />
       <div class="admin-content">
-        <HistoryLink />
         <div>
           <router-view></router-view>
         </div>
@@ -28,7 +28,7 @@ import HistoryLink from './components/historyLink.vue'
     }
 
     .admin-content {
-      @apply pt-20 p-6;
+      @apply pt-20 md:pt-36 p-6;
     }
   }
 }

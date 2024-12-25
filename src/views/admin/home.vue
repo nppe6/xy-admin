@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import adminHeader from './components/adminHeader.vue'
-import adminEcharts from './components/echartsVisits.vue'
+import echartsVisits from './components/echartsVisits.vue'
+import echartsInfo from './components/echartsInfo.vue'
 </script>
 <template>
   <div class="grid md:grid-flow-col gap-3 cursor-pointer">
@@ -9,10 +10,10 @@ import adminEcharts from './components/echartsVisits.vue'
 
   <div class="grid md:grid-cols-[612px_auto] gap-6">
     <div class="md:w-[612px] h-[308px] mt-6">
-      <admin-echarts> </admin-echarts>
+      <echarts-visits />
     </div>
     <div class="h-[308px] mt-6">
-      <admin-echarts />
+      <echarts-info />
     </div>
   </div>
 </template>

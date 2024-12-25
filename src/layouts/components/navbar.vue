@@ -5,7 +5,7 @@
     <el-breadcrumb
       separator="/"
       class="dark:text-white">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>编辑器</el-breadcrumb-item>
     </el-breadcrumb>
 

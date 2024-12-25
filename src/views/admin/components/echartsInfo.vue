@@ -1,43 +1,50 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getOptions, monthData, weekData } from './echarts'
+import { getOptionsInfo, monthData, weekData } from './echarts'
 
-const chartContainer = ref<HTMLDivElement | null>(null) // 图表容器
-const chartInstance = ref<echarts.ECharts | null>(null) // 图表实例
+const chart1 = ref<HTMLDivElement | null>(null) // 第一个图表容器
+const chart2 = ref<HTMLDivElement | null>(null) // 第二个图表容器
+const chartInstance1 = ref<echarts.ECharts | null>(null) // 第一个图表实例
+const chartInstance2 = ref<echarts.ECharts | null>(null) // 第二个图表实例
 
 const activeTab = ref<'week' | 'month'>('week') // 当前激活的标签
 
 // 初始化图表
-const initChart = () => {
-  if (chartContainer.value) {
-    chartInstance.value = echarts.init(chartContainer.value)
+const initCharts = () => {
+  if (chart1.value) {
+    chartInstance1.value = echarts.init(chart1.value)
+    updateChart(chartInstance1.value, weekData)
+  }
 
-    // 设置初始图表数据
-    updateChart(weekData)
+  if (chart2.value) {
+    chartInstance2.value = echarts.init(chart2.value)
+    updateChart(chartInstance2.value, weekData)
   }
 }
 
-// 更新图表数据
-const updateChart = (data: { dates: string[]; values: number[] }) => {
-  if (chartInstance.value) {
-    const option: echarts.EChartsOption = getOptions(data)
-    chartInstance.value.setOption(option)
+// 更新单个图表数据
+const updateChart = (
+  instance: echarts.ECharts | null,
+  data: { dates: string[]; values: number[] }
+) => {
+  if (instance) {
+    const option = getOptionsInfo(data)
+    instance.setOption(option)
   }
 }
 
 // 切换数据
 const switchData = (tab: 'week' | 'month') => {
   activeTab.value = tab
-  if (tab === 'week') {
-    updateChart(weekData)
-  } else {
-    updateChart(monthData)
-  }
+
+  const data = tab === 'week' ? weekData : monthData
+  updateChart(chartInstance1.value, data)
+  updateChart(chartInstance2.value, data)
 }
 
 // 在组件挂载时初始化图表
 onMounted(() => {
-  initChart()
+  initCharts()
 })
 </script>
 
@@ -47,7 +54,7 @@ onMounted(() => {
     :body-style="{ padding: '0px' }">
     <template #header>
       <div class="flex justify-between items-center">
-        <h3 class="text-[22px] font-bold">访问量</h3>
+        <h3 class="text-[22px] font-bold">数据分析</h3>
         <!-- 按钮 -->
         <div class="buttons">
           <el-button
@@ -65,11 +72,14 @@ onMounted(() => {
         </div>
       </div>
     </template>
-    <div class="mt-4">
+    <div class="grid grid-cols-2 mt-4">
       <!-- 图表容器 -->
       <div
-        ref="chartContainer"
-        class="w-full h-[248px]"></div>
+        ref="chart1"
+        class="h-[248px]"></div>
+      <div
+        ref="chart2"
+        class="h-[248px]"></div>
     </div>
   </el-card>
 </template>
