@@ -1,42 +1,63 @@
 <script setup lang="ts">
+import { router } from '@/store/router'
 import { reactive } from 'vue'
+import { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 
-interface IMenuItem {
-  title: string
-  icon?: string
-  active?: boolean
-}
+const routerStore = router()
 
-interface IMenu extends IMenuItem {
-  children?: IMenuItem[]
-}
+// interface IMenuItem {
+//   title: string
+//   icon?: string
+//   active?: boolean
+// }
 
-const menus = reactive<IMenu[]>([
-  {
-    title: '错误页面',
-    icon: 'fas fa-file-excel',
-    children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
-  },
-  {
-    title: '编辑器',
-    icon: 'fas fa-pen-to-square',
-    children: [{ title: '富文本编辑器' }, { title: 'markdown编辑器' }]
-  }
-])
+// interface IMenu extends IMenuItem {
+//   children?: IMenuItem[]
+// }
+
+// const menus = reactive<IMenu[]>([
+//   {
+//     title: '错误页面',
+//     icon: 'fas fa-file-excel',
+//     children: [{ title: '404页面' }, { title: '403页面' }, { title: '500页面' }]
+//   },
+//   {
+//     title: '编辑器',
+//     icon: 'fas fa-pen-to-square',
+//     children: [{ title: '富文本编辑器' }, { title: 'markdown编辑器' }]
+//   }
+// ])
 
 const resetMenus = () => {
-  menus.forEach((pmenu) => {
-    pmenu.active = false
-    pmenu.children?.forEach((cmenu) => (cmenu.active = false))
+  routerStore.routes.forEach((pRoute) => {
+    pRoute.meta.isActive = false
+    pRoute.children?.forEach((cRoute) => {
+      if (cRoute.meta) {
+        cRoute.meta.isActive = false
+      }
+    })
   })
 }
 
-const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
-  if (pmenu.active) {
-    resetMenus()
+const handleClick = (
+  pRoute: RouteRecordNormalized,
+  cRoute?: RouteRecordRaw
+) => {
+  if (cRoute && cRoute.meta) {
+    if (pRoute.meta.isActive && cRoute.meta.isActive) {
+      // resetMenus()
+    } else {
+      resetMenus()
+      pRoute.meta.isActive = true
+      cRoute.meta.isActive = true
+    }
   } else {
-    resetMenus()
-    pmenu.active = true
+    if (pRoute.meta.isActive) {
+      resetMenus()
+    } else {
+      resetMenus()
+      pRoute.meta.isActive = true
+    }
   }
 }
 </script>
@@ -52,27 +73,28 @@ const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
       </div>
       <div class="menu-main">
         <dl
-          v-for="(item, index) in menus"
+          v-for="(route, index) in routerStore.routes"
           :key="index">
-          <dt @click="handleClick(item)">
+          <dt @click="handleClick(route)">
             <section>
               <i
                 class="mr-2"
-                :class="item.icon"></i>
-              <span>{{ item.title }}</span>
+                :class="route.meta.icon"></i>
+              <span>{{ route.meta.title }}</span>
             </section>
             <section>
               <i
                 class="fas fa-angle-down text-[16px] duration-300"
-                :class="{ ' rotate-180': item.active }"></i>
+                :class="{ ' rotate-180': route.meta.isActive }"></i>
             </section>
           </dt>
           <dd
-            v-show="item.active"
-            :class="{ active: ele.active }"
-            v-for="(ele, index) in item.children"
+            v-show="route.meta.isActive"
+            :class="{ active: childrenRoute.meta?.isActive }"
+            v-for="(childrenRoute, index) in route.children"
+            @click="handleClick(route, childrenRoute)"
             :key="index">
-            {{ ele.title }}
+            {{ childrenRoute.meta?.title }}
           </dd>
         </dl>
       </div>

@@ -1,10 +1,12 @@
 import { App } from 'vue'
 import { setupTailwindcss } from './tailwindcss'
 import _ from 'lodash'
+import setupPinia from './pinia'
 
 export function setupPlugins(app: App) {
   autoRegisterComponents(app)
   setupTailwindcss()
+  setupPinia(app)
 }
 
 export function autoRegisterComponents(app: App) {

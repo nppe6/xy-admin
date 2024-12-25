@@ -11,5 +11,6 @@ declare module 'vue-router' {
     show?: boolean
     title?: string
     icon?: string
+    isActive?: boolean // 定义改菜单选项是否激活选中
   }
 }

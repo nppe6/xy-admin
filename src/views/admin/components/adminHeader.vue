@@ -10,7 +10,7 @@
         <span>用户数</span>
         <el-tag
           type="danger"
-          size="mini"
+          size="small"
           effect="dark"
           @close=""
           >月</el-tag

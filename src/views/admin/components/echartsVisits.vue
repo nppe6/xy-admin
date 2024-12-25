@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { getOptions, monthData, weekData } from './echarts'
 
 const chartContainer = ref<HTMLDivElement | null>(null) // 图表容器
@@ -36,7 +36,7 @@ const switchData = (tab: 'week' | 'month') => {
 }
 
 // 在组件挂载时初始化图表
-onMounted(() => {
+nextTick(() => {
   initChart()
 })
 </script>
