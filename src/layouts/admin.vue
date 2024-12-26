@@ -15,7 +15,11 @@ menuStore.init()
       <HistoryLink class="fixed right-0 top-[72px] z-10 w-[calc(100%-208px)]" />
       <div class="admin-content">
         <div>
-          <router-view></router-view>
+          <router-view #default="{ Component }">
+            <Transition enter-active-class="animate__animated animate__fadeInRightBig">
+              <component :is="Component"></component>
+            </Transition>
+          </router-view>
         </div>
       </div>
     </div>
