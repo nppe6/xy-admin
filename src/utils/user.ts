@@ -3,6 +3,7 @@ import { CacheEnum } from '@/enum/cacheEnum'
 import router from '@/router'
 import user from '@/store/user'
 import store from '@/utils/store'
+import utils from '.'
 
 export async function login(values: ILoginData) {
   const {
@@ -10,12 +11,13 @@ export async function login(values: ILoginData) {
   } = await axiosLogin(values)
 
   store.set(CacheEnum.TOKEN_NAME, { token }, 1000)
-  router.push({ name: 'home' })
+  const routeName = utils.store.get(CacheEnum.REDIRECT_ROUTER_NAME)
+  router.push({ name: routeName })
 }
 
 export function logout() {
   const userStore = user()
   store.remove(CacheEnum.TOKEN_NAME)
-  userStore.info = null
+  userStore.clearInfo()
   router.push('/')
 }
