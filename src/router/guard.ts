@@ -1,5 +1,6 @@
+import { CacheEnum } from '@/enum/cacheEnum'
 import user from '@/store/user'
-import { store } from '@/utils'
+import utils from '@/utils'
 import {
   RouteLocationNormalizedGeneric,
   RouteLocationNormalizedLoadedGeneric,
@@ -30,7 +31,7 @@ class Guard {
   }
 
   private token(): string | null {
-    return store.get('token')?.token
+    return utils.store.get(CacheEnum.TOKEN_NAME)?.token
   }
 
   private isGuest(route: RouteLocationNormalizedGeneric) {

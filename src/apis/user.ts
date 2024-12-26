@@ -16,7 +16,12 @@ export interface LoginInterface {
   token: string
 }
 
-export function axiosLogin(data: any) {
+export interface ILoginData {
+  username: string
+  password: string
+}
+
+export function axiosLogin(data: ILoginData) {
   return http.request<LoginInterface>({
     url: 'login',
     method: 'post',
