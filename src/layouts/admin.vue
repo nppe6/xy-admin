@@ -2,6 +2,10 @@
 import MenuComponents from '@/layouts/components/menu.vue'
 import NavbarComponents from './components/navbar.vue'
 import HistoryLink from './components/historyLink.vue'
+import menu from '@/store/menu'
+
+const menuStore = menu()
+menuStore.init()
 </script>
 <template>
   <div class="admin flex">
@@ -36,6 +40,6 @@ import HistoryLink from './components/historyLink.vue'
 
 <script lang="ts">
 export default {
-  route: { meta: { auth: true } }
+  route: { meta: { auth: true } },
 }
 </script>

@@ -1,41 +1,38 @@
 <script setup lang="ts">
-import { router } from '@/store/router'
-import { reactive } from 'vue'
-import { RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router'
+import { IMenu } from '#/menu'
+import menu from '@/store/menu'
+import router from '@/router'
 
-const routerStore = router()
-const routers = useRouter()
+const menuStore = menu()
 
 const resetMenus = () => {
-  routerStore.routes.forEach((pRoute) => {
-    pRoute.meta.isActive = false
-    pRoute.children?.forEach((cRoute) => {
-      if (cRoute.meta) {
-        cRoute.meta.isActive = false
+  menuStore.menus.forEach((pmenu) => {
+    pmenu.isActive = false
+    pmenu.children?.forEach((cmenu) => {
+      if (cmenu) {
+        cmenu.isActive = false
       }
     })
   })
 }
 
-const handleClick = (
-  pRoute: RouteRecordNormalized,
-  cRoute?: RouteRecordRaw
-) => {
-  if (cRoute && cRoute.meta) {
-    if (pRoute.meta.isActive && cRoute.meta.isActive) {
+const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
+  if (cmenu) {
+    if (pmenu.isActive && cmenu.isActive) {
       // resetMenus()
     } else {
       resetMenus()
-      pRoute.meta.isActive = true
-      cRoute.meta.isActive = true
-      routers.push(cRoute)
+      pmenu.isActive = true
+      cmenu.isActive = true
+      // routers.push(cmenu)
+      router.push({ name: cmenu.route })
     }
   } else {
-    if (pRoute.meta.isActive) {
+    if (pmenu.isActive) {
       resetMenus()
     } else {
       resetMenus()
-      pRoute.meta.isActive = true
+      pmenu.isActive = true
     }
   }
 }
@@ -51,29 +48,23 @@ const handleClick = (
         </router-link>
       </div>
       <div class="menu-main">
-        <dl
-          v-for="(route, index) in routerStore.routes"
-          :key="index">
-          <dt @click="handleClick(route)">
+        <dl v-for="(menu, index) in menuStore.menus" :key="index">
+          <dt @click="handleClick(menu)">
             <section>
-              <i
-                class="mr-2"
-                :class="route.meta.icon"></i>
-              <span>{{ route.meta.title }}</span>
+              <i class="mr-2" :class="menu.icon"></i>
+              <span>{{ menu.title }}</span>
             </section>
             <section>
-              <i
-                class="fas fa-angle-down text-[16px] duration-300"
-                :class="{ ' rotate-180': route.meta.isActive }"></i>
+              <i class="fas fa-angle-down text-[16px] duration-300" :class="{ ' rotate-180': menu.isActive }"></i>
             </section>
           </dt>
           <dd
-            v-show="route.meta.isActive"
-            :class="{ active: childrenRoute.meta?.isActive }"
-            v-for="(childrenRoute, index) in route.children"
-            @click="handleClick(route, childrenRoute)"
+            v-show="menu.isActive"
+            :class="{ active: cmenu?.isActive }"
+            v-for="(cmenu, index) in menu.children"
+            @click="handleClick(menu, cmenu)"
             :key="index">
-            {{ childrenRoute.meta?.title }}
+            {{ cmenu?.title }}
           </dd>
         </dl>
       </div>
