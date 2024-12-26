@@ -36,6 +36,20 @@ export default defineStore('menus-store', {
       this.historyMenu.splice(index, 1)
       utils.store.set(CacheEnum.HISTORY_MENU, this.historyMenu)
     },
+    // 设置当前选中菜单
+    setCurrentMenu(route: RouteLocationNormalizedGeneric) {
+      this.menus.forEach((m) => {
+        m.isActive = false
+        m.children?.forEach((c) => {
+          c.isActive = false
+          if (c.route == route.name) {
+            m.isActive = true
+            c.isActive = true
+          }
+        })
+      })
+    },
+
     // 根据路由获取菜单
     getMenuByRouter() {
       this.menus = router

@@ -2,8 +2,12 @@
 import { IMenu } from '#/menu'
 import menu from '@/store/menu'
 import router from '@/router'
+import { useRoute } from 'vue-router'
+import { watch } from 'vue'
 
+const route = useRoute()
 const menuStore = menu()
+watch(route, () => menuStore.setCurrentMenu(route), { immediate: true })
 
 const resetMenus = () => {
   menuStore.menus.forEach((pmenu) => {
@@ -48,6 +52,14 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
         </router-link>
       </div>
       <div class="menu-main">
+        <dl>
+          <dt @click="$router.push({ name: 'admin-home' })">
+            <section>
+              <i class="fas fa-house-chimney mr-2"></i>
+              <span>dashboard</span>
+            </section>
+          </dt>
+        </dl>
         <dl v-for="(menu, index) in menuStore.menus" :key="index">
           <dt @click="handleClick(menu)">
             <section>
