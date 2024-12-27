@@ -43,8 +43,8 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
 </script>
 
 <template>
-  <div class="admin-menu">
-    <div class="admin-menu-warp xy-menu-warp-fixed p-2">
+  <div class="admin-menu" :class="{ 'xy-menu-closed': menuStore.menusClose }">
+    <div class="admin-menu-warp xy-menu-warp-fixed">
       <div class="menu-header">
         <router-link :to="{ name: 'home' }">
           <i class="fab fa-cloudversify logo-icon"></i>
@@ -70,13 +70,14 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
               <i class="fas fa-angle-down text-[16px] duration-300" :class="{ ' rotate-180': menu.isActive }"></i>
             </section>
           </dt>
-          <dd
-            v-show="menu.isActive"
-            :class="{ active: cmenu?.isActive }"
-            v-for="(cmenu, index) in menu.children"
-            @click="handleClick(menu, cmenu)"
-            :key="index">
-            {{ cmenu?.title }}
+          <dd v-show="menu.isActive && !menuStore.menusClose">
+            <div
+              :class="{ active: cmenu.isActive }"
+              v-for="(cmenu, index) in menu.children"
+              @click="handleClick(menu, cmenu)"
+              :key="index">
+              {{ cmenu?.title }}
+            </div>
           </dd>
         </dl>
       </div>
@@ -87,7 +88,7 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
 
 <style scoped lang="scss">
 .admin-menu {
-  @apply flex-shrink-0 w-[208px] bg-white dark:bg-[#151518] min-h-screen;
+  @apply flex-shrink-0 w-[208px] bg-white dark:bg-[#151518] min-h-screen z-50;
 
   .admin-menu-warp {
     @apply text-gray-900 dark:text-white h-full flex flex-col;
@@ -107,7 +108,7 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
       }
     }
     .menu-main {
-      @apply flex-grow overflow-x-hidden overflow-y-auto;
+      @apply flex-grow;
 
       &::-webkit-scrollbar {
         width: 5px;
@@ -132,16 +133,68 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
         @apply text-gray-900 dark:text-white text-sm;
 
         dt {
-          @apply text-[16px] mt-6 py-3 px-3  flex justify-between items-center cursor-pointer rounded-md duration-300 hover:bg-[#f0f0f1] dark:hover:bg-zinc-600;
+          @apply text-[16px] mt-6 py-3 px-3  flex justify-between items-center cursor-pointer duration-300 hover:bg-[#f0f0f1] dark:hover:bg-zinc-600;
         }
 
         dd {
-          @apply py-3 pl-8 my-2 cursor-pointer rounded-md duration-300 hover:bg-[#f0f0f1] dark:hover:bg-zinc-600;
-          &.active {
-            @apply bg-[#f0f0f1] dark:bg-zinc-600 text-blue-700;
+          div {
+            @apply py-3 pl-8 my-2 cursor-pointer duration-300 hover:bg-[#f0f0f1] dark:hover:bg-zinc-600;
+            &.active {
+              @apply bg-[#f0f0f1] dark:bg-zinc-600 text-blue-700;
+            }
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .admin-menu {
+    &.xy-menu-closed {
+      @apply w-12 overflow-hidden;
+
+      .menu-header {
+        h1 {
+          @apply hidden;
+        }
+      }
+
+      .menu-main {
+        dl {
+          @apply relative;
+          dt {
+            @apply flex justify-center w-full;
+
+            section {
+              i {
+                @apply mr-0;
+              }
+              span {
+                @apply hidden;
+              }
+
+              &:nth-of-type(2) {
+                @apply hidden;
+              }
+            }
+          }
+
+          &:hover {
+            dd {
+              display: block !important;
+              @apply absolute  left-full top-0 w-[200px] bg-white border shadow-md;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .admin-menu {
+    @apply flex-shrink-0 w-[208px] bg-white dark:bg-[#151518] min-h-screen;
+    .xy-menu-closed {
     }
   }
 }

@@ -10,6 +10,7 @@ export default defineStore('menus-store', {
     return {
       menus: [] as IMenu[],
       historyMenu: [] as IMenu[],
+      menusClose: false,
     }
   },
 
@@ -65,6 +66,11 @@ export default defineStore('menus-store', {
           return menu
         })
         .filter((route) => route.children?.length) as IMenu[]
+    },
+
+    // 收缩菜单
+    toggleState() {
+      this.menusClose = !this.menusClose
     },
   },
 })

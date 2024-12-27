@@ -1,16 +1,22 @@
 <script setup lang="ts">
+import menu from '@/store/menu'
 import user from '@/store/user'
 import utils from '@/utils'
 
 const userStore = user()
+const menuStore = menu()
 </script>
 
 <template>
   <div class="bg-white dark:bg-[#151518] p-4 flex justify-between items-center">
-    <el-breadcrumb separator="/" class="dark:text-white">
-      <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>编辑器</el-breadcrumb-item>
-    </el-breadcrumb>
+    <div class="flex items-center" @click="menuStore.toggleState()">
+      <i class="fas fa-indent pr-4 cursor-pointer" v-if="menuStore.menusClose"></i>
+      <i class="fas fa-outdent pr-4 cursor-pointer" v-else></i>
+      <el-breadcrumb separator="/" class="dark:text-white">
+        <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>编辑器</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
 
     <div class="flex justify-center items-center gap-4">
       <div class="flex justify-center items-center gap-4">

@@ -21,10 +21,10 @@ onBeforeRouteLeave((to) => {
 </script>
 <template>
   <div class="admin flex">
-    <MenuComponents class="hidden md:block" />
+    <MenuComponents />
     <div class="admin-main">
-      <NavbarComponents class="admin-navbar" />
-      <HistoryLink class="fixed right-0 top-[72px] z-10 w-[calc(100%-208px)]" />
+      <NavbarComponents class="admin-navbar" :class="{ 'admin-w-close': menuStore.menusClose }" />
+      <HistoryLink class="admin-history" :class="{ 'admin-w-close': menuStore.menusClose }" />
       <div class="admin-content">
         <div>
           <router-view #default="{ Component }">
@@ -45,6 +45,14 @@ onBeforeRouteLeave((to) => {
 
     .admin-navbar {
       @apply fixed right-0 top-0 z-10 w-full md:w-[calc(100%-208px)];
+    }
+
+    .admin-history {
+      @apply fixed right-0 top-[72px] z-10 w-[calc(100%-208px)];
+    }
+
+    .admin-w-close {
+      @apply w-[calc(100%-48px)] overflow-hidden;
     }
 
     .admin-content {
