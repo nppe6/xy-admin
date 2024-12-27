@@ -83,6 +83,8 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
       </div>
       <div class="menu-footer"></div>
     </div>
+
+    <div class="bg block md:hidden" @click="menuStore.toggleState()"></div>
   </div>
 </template>
 
@@ -193,8 +195,17 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
 }
 @media screen and (max-width: 768px) {
   .admin-menu {
-    @apply flex-shrink-0 w-[208px] bg-white dark:bg-[#151518] min-h-screen;
-    .xy-menu-closed {
+    @apply fixed left-0 top-0 w-[208px] min-h-screen z-50;
+    .admin-menu-warp {
+      @apply h-full z-50 bg-white dark:bg-[#151518];
+    }
+
+    .bg {
+      @apply fixed left-0 top-0 w-screen h-screen bg-gray-800 opacity-75 z-40; /* 默认隐藏遮罩 */
+    }
+
+    &.xy-menu-closed {
+      @apply hidden;
     }
   }
 }

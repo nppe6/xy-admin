@@ -60,6 +60,26 @@ onBeforeRouteLeave((to) => {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .admin {
+    .admin-main {
+      .admin-w-close {
+        @apply w-full overflow-hidden;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .admin {
+    .admin-main {
+      .admin-w-close {
+        @apply w-[calc(100%-48px)] overflow-hidden;
+      }
+    }
+  }
+}
 </style>
 
 <script lang="ts">
