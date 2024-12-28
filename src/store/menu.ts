@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { IMenu } from '#/menu'
 import router from '@/router'
-import { RouteLocationNormalizedGeneric } from 'vue-router'
+import { RouteLocationNormalizedGeneric, RouteRecordRaw } from 'vue-router'
 import utils from '@/utils'
 import { CacheEnum } from '@/enum/cacheEnum'
 import { ElMessage } from 'element-plus'
@@ -19,7 +19,17 @@ export default defineStore('menus-store', {
   actions: {
     init() {
       this.getMenuByRouter()
-      this.historyMenu = utils.store.get(CacheEnum.HISTORY_MENU) ?? []
+      this.historyMenu = this.getHisRoutesMenu()
+    },
+    // 获取历史菜单
+    getHisRoutesMenu() {
+      const routes = [] as RouteRecordRaw[]
+      router.getRoutes().map((route) => routes.push(...route.children))
+
+      let menus: IMenu[] = utils.store.get(CacheEnum.HISTORY_MENU) ?? []
+      return menus.filter((m) => {
+        return routes.some((r) => r.name === m.route)
+      })
     },
     // 添加历史菜单
     addHistoryMenu(route: RouteLocationNormalizedGeneric) {
@@ -28,7 +38,7 @@ export default defineStore('menus-store', {
 
       const menu: IMenu = { ...route.meta.menu, route: route.name as string }
       const isHas = this.historyMenu.some((menu) => menu.route == route.name)
-      if (!isHas) this.historyMenu.unshift(menu)
+      if (!isHas) this.historyMenu.splice(1, 0, menu)
       if (this.historyMenu.length > 10) {
         this.historyMenu.pop()
       }
