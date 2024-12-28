@@ -2,9 +2,16 @@
 import menu from '@/store/menu'
 import user from '@/store/user'
 import utils from '@/utils'
+import { ref } from 'vue'
 
 const userStore = user()
 const menuStore = menu()
+let isFullScreen = ref(false)
+
+const fullScreen = () => {
+  isFullScreen.value ? document.exitFullscreen() : document.documentElement.requestFullscreen()
+  isFullScreen.value = !isFullScreen.value
+}
 </script>
 
 <template>
@@ -21,8 +28,14 @@ const menuStore = menu()
     <div class="flex justify-center items-center gap-4">
       <div class="flex justify-center items-center gap-4">
         <i class="fas fa-sun text-[22px] text-gray-600 dark:text-white cursor-pointer"></i>
-        <i class="fas fa-expand text-[22px] text-gray-600 dark:text-white cursor-pointer"></i>
-        <!-- <i class="fas fa-compress"></i> -->
+        <i
+          v-if="!isFullScreen"
+          class="fas fa-expand text-[22px] text-gray-600 dark:text-white cursor-pointer"
+          @click="fullScreen()"></i>
+        <i
+          v-else
+          class="fas fa-compress text-[22px] text-gray-600 dark:text-white cursor-pointer"
+          @click="fullScreen()"></i>
       </div>
       <div>
         <el-dropdown trigger="click">
