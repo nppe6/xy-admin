@@ -11,6 +11,6 @@ declare module 'vue-router' {
     // 路由是否在菜单显示
     menu?: IMenu
     // 权限控制
-    permissions?: string[]
+    permission?: string
   }
 }

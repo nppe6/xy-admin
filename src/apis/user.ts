@@ -4,11 +4,12 @@ export interface InfoInterface {
   name: string
   age: number
   avatar: string
+  permissions: string[]
 }
 
 export async function getInfo() {
   return http.request<InfoInterface>({
-    url: 'user/info'
+    url: 'user/info',
   })
 }
 
@@ -25,6 +26,6 @@ export function axiosLogin(data: ILoginData) {
   return http.request<LoginInterface>({
     url: 'login',
     method: 'post',
-    data
+    data,
   })
 }

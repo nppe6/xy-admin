@@ -13,10 +13,11 @@ export default [
         data: {
           name: '萧先生',
           age: 19,
-          avatar: '/image/01.jpg'
-        }
+          avatar: '/image/01.jpg',
+          permissions: ['editor_markdown', 'article_edit'],
+        },
       }
-    }
+    },
   },
   {
     url: '/api/login',
@@ -27,9 +28,9 @@ export default [
         message: '请求成功！',
         type: 'success',
         data: {
-          token: '112233xiao'
-        }
+          token: '112233xiao',
+        },
       }
-    }
-  }
+    },
+  },
 ] as MockMethod[]

@@ -7,9 +7,8 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 
 async function bootstrap() {
   const app = createApp(App)
-  setupRouter(app)
-
   setupPlugins(app)
+  setupRouter(app)
 
   // 等待页面路由挂载完成以后再渲染页面
   await router.isReady()

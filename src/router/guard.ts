@@ -16,12 +16,12 @@ class Guard {
     if (this.isLogin(to) === false) return { name: 'login' }
     if (this.isGuest(to) === false) return from
 
-    await this.getUserInfo()
+    // await this.getUserInfo()
   }
 
-  private getUserInfo() {
-    if (this.token()) return user().axiosUserInfo()
-  }
+  // private getUserInfo() {
+  //   if (this.token()) return user().axiosUserInfo()
+  // }
 
   private token(): string | null {
     return utils.store.get(CacheEnum.TOKEN_NAME)?.token
