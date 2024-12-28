@@ -12,6 +12,7 @@ export default defineStore('menus-store', {
       menus: [] as IMenu[],
       historyMenu: [] as IMenu[],
       menusClose: false,
+      route: null as null | RouteLocationNormalizedGeneric,
     }
   },
 
@@ -23,6 +24,8 @@ export default defineStore('menus-store', {
     // 添加历史菜单
     addHistoryMenu(route: RouteLocationNormalizedGeneric) {
       if (!route.meta.menu) return
+      this.route = route
+
       const menu: IMenu = { ...route.meta.menu, route: route.name as string }
       const isHas = this.historyMenu.some((menu) => menu.route == route.name)
       if (!isHas) this.historyMenu.unshift(menu)

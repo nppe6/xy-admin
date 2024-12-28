@@ -54,7 +54,7 @@ watch(
     @apply flex-grow overflow-hidden bg-[#f6f6f8] dark:bg-[#0a0a0a];
 
     .admin-navbar {
-      @apply fixed right-0 top-0 z-10 w-full md:w-[calc(100%-208px)];
+      @apply fixed right-0 top-0 z-20 w-full md:w-[calc(100%-208px)];
     }
 
     .admin-history {
@@ -62,7 +62,7 @@ watch(
     }
 
     .admin-w-close {
-      @apply w-[calc(100%-48px)] overflow-hidden;
+      @apply w-[calc(100%-48px)];
     }
 
     .admin-content {
@@ -75,7 +75,7 @@ watch(
   .admin {
     .admin-main {
       .admin-w-close {
-        @apply w-full overflow-hidden;
+        @apply w-full;
       }
     }
   }
@@ -85,7 +85,7 @@ watch(
   .admin {
     .admin-main {
       .admin-w-close {
-        @apply w-[calc(100%-48px)] overflow-hidden;
+        @apply w-[calc(100%-48px)];
       }
     }
   }

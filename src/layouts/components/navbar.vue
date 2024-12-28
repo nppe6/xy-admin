@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Notification from '@/components/notification.vue'
+import Breadcrumb from '@/components/breadcrumb.vue'
 import menu from '@/store/menu'
 import user from '@/store/user'
 import utils from '@/utils'
@@ -19,10 +21,7 @@ const fullScreen = () => {
     <div class="flex items-center" @click="menuStore.toggleState()">
       <i class="fas fa-indent pr-4 cursor-pointer" v-if="menuStore.menusClose"></i>
       <i class="fas fa-outdent pr-4 cursor-pointer" v-else></i>
-      <el-breadcrumb separator="/" class="dark:text-white">
-        <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>编辑器</el-breadcrumb-item>
-      </el-breadcrumb>
+      <Breadcrumb @click.stop class="hidden md:block" />
     </div>
 
     <div class="flex justify-center items-center gap-4">
@@ -36,6 +35,7 @@ const fullScreen = () => {
           v-else
           class="fas fa-compress text-[22px] text-gray-600 dark:text-white cursor-pointer"
           @click="fullScreen()"></i>
+        <Notification />
       </div>
       <div>
         <el-dropdown trigger="click">
