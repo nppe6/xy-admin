@@ -3,21 +3,31 @@ import MenuComponents from '@/layouts/components/menu.vue'
 import NavbarComponents from './components/navbar.vue'
 import HistoryLink from './components/historyLink.vue'
 import menu from '@/store/menu'
-import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { watch } from 'vue'
 
 const route = useRoute()
 const menuStore = menu()
 menuStore.init()
-// 历史菜单的 添加
-menuStore.addHistoryMenu(route)
-// 路由更新之前触发
-onBeforeRouteUpdate((to) => {
-  menuStore.addHistoryMenu(to)
-})
-// 路由离开之前触发
-onBeforeRouteLeave((to) => {
-  menuStore.addHistoryMenu(to)
-})
+watch(
+  route,
+  () => {
+    menuStore.addHistoryMenu(route)
+  },
+  { immediate: true },
+)
+
+// menuStore.init()
+// // 历史菜单的 添加
+// menuStore.addHistoryMenu(route)
+// // 路由更新之前触发
+// onBeforeRouteUpdate((to) => {
+//   menuStore.addHistoryMenu(to)
+// })
+// // 路由离开之前触发
+// onBeforeRouteLeave((to) => {
+//   menuStore.addHistoryMenu(to)
+// })
 </script>
 <template>
   <div class="admin flex">
