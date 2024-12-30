@@ -16,18 +16,6 @@ watch(
   },
   { immediate: true },
 )
-
-// menuStore.init()
-// // 历史菜单的 添加
-// menuStore.addHistoryMenu(route)
-// // 路由更新之前触发
-// onBeforeRouteUpdate((to) => {
-//   menuStore.addHistoryMenu(to)
-// })
-// // 路由离开之前触发
-// onBeforeRouteLeave((to) => {
-//   menuStore.addHistoryMenu(to)
-// })
 </script>
 <template>
   <div class="admin flex">
@@ -36,13 +24,11 @@ watch(
       <NavbarComponents class="admin-navbar" :class="{ 'admin-w-close': menuStore.menusClose }" />
       <HistoryLink class="admin-history" :class="{ 'admin-w-close': menuStore.menusClose }" />
       <div class="admin-content">
-        <div>
-          <router-view #default="{ Component }">
-            <Transition enter-active-class="animate__animated animate__fadeInRightBig">
-              <component :is="Component"></component>
-            </Transition>
-          </router-view>
-        </div>
+        <router-view #default="{ Component }">
+          <Transition mode="out-in" appear enter-active-class="slide-in-right" leave-active-class="slide-out-left">
+            <component :is="Component"></component>
+          </Transition>
+        </router-view>
       </div>
     </div>
   </div>
@@ -67,6 +53,44 @@ watch(
 
     .admin-content {
       @apply pt-20 md:pt-36 p-6;
+
+      /* 动画持续时间 */
+      .slide-in-right,
+      .slide-out-left {
+        animation-duration: 0.5s; /* 动画时间 */
+        animation-timing-function: ease-in-out; /* 缓动函数 */
+        animation-fill-mode: both; /* 动画结束后保持最后状态 */
+      }
+
+      /* 右边滑入效果 */
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%); /* 从屏幕右边外部开始 */
+          opacity: 0; /* 初始透明 */
+        }
+        to {
+          transform: translateX(0); /* 移动到正常位置 */
+          opacity: 1; /* 最终显示 */
+        }
+      }
+      .slide-in-right {
+        animation-name: slideInRight;
+      }
+
+      /* 左边滑出效果 */
+      @keyframes slideOutLeft {
+        from {
+          transform: translateX(0); /* 从正常位置开始 */
+          opacity: 1; /* 初始显示 */
+        }
+        to {
+          transform: translateX(-100%); /* 移动到屏幕左边外部 */
+          opacity: 0; /* 最终透明 */
+        }
+      }
+      .slide-out-left {
+        animation-name: slideOutLeft;
+      }
     }
   }
 }

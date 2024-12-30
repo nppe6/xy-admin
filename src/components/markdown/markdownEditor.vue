@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick } from 'vue'
+import { onMounted } from 'vue'
 import ToastEditor from './toastEditor'
 
 interface IProps {
@@ -7,15 +7,15 @@ interface IProps {
   placeholder?: string
 }
 
-const content = defineModel({ type: String })
+const content = defineModel({ type: String, default: '' })
 
 const props = withDefaults(defineProps<IProps>(), {
   height: '420px',
   placeholder: '',
 })
 
-nextTick(() => {
-  const toastValue = new ToastEditor('#editor', `${content.value}`, `${props.height}`)
+onMounted(() => {
+  const toastValue = new ToastEditor('#markdownEditor', `${content.value}`, `${props.height}`)
   toastValue.editor.on('change', (type: string) => {
     const value = type == 'markdown' ? toastValue.editor.getMarkdown() : toastValue.editor.getHTML()
     content.value = value
@@ -24,17 +24,19 @@ nextTick(() => {
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div>
+    <div id="markdownEditor"></div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-#editor {
+#markdownEditor {
   @apply bg-white;
 
   //全屏控制
   :deep(.fullScreen) {
     position: fixed !important;
-    z-index: 9999;
+    z-index: 60;
     top: 0;
     left: 0;
     right: 0;

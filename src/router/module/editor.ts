@@ -7,9 +7,9 @@ export default {
   meta: { auth: true, menu: { title: '编辑器', icon: 'fas fa-pen-to-square' } },
   children: [
     {
-      name: 'editor-base',
-      path: 'base',
-      component: () => import('@/views/editor/base.vue'),
+      name: 'editor-wangEditor',
+      path: 'wangEditor',
+      component: () => import('@/views/editor/wangEditor.vue'),
       meta: { menu: { title: '富文本编辑器' } },
     },
     {
