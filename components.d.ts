@@ -20,9 +20,11 @@ declare module 'vue' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
+    MarkdownEditor: typeof import('./src/components/markdown/markdownEditor.vue')['default']
     Notification: typeof import('./src/components/notification.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    WangEditor: typeof import('./src/components/wangEditor/wangEditor.vue')['default']
     XyInput: typeof import('./src/components/form/xy-input.vue')['default']
   }
 }

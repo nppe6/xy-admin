@@ -8,6 +8,7 @@ export default [
     response: () => {
       return {
         code: 200,
+        errno: 0,
         message: '上传成功！',
         type: 'success',
         data: {
