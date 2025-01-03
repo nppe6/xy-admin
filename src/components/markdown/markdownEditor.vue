@@ -10,7 +10,7 @@ interface IProps {
 const content = defineModel({ type: String, default: '' })
 
 const props = withDefaults(defineProps<IProps>(), {
-  height: '420px',
+  height: '500px',
   placeholder: '',
 })
 
