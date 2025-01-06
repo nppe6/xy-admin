@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { getOptions, monthData, weekData } from './echarts'
 
 const chartContainer = ref<HTMLDivElement | null>(null) // 图表容器
@@ -20,7 +20,7 @@ const initChart = () => {
 // 更新图表数据
 const updateChart = (data: { dates: string[]; values: number[] }) => {
   if (chartInstance.value) {
-    const option: echarts.EChartsOption = getOptions(data)
+    const option: echarts.EChartOption = getOptions(data)
     chartInstance.value.setOption(option)
   }
 }
@@ -42,24 +42,16 @@ nextTick(() => {
 </script>
 
 <template>
-  <el-card
-    shadow="never"
-    :body-style="{ padding: '0px' }">
+  <el-card shadow="never" :body-style="{ padding: '0px' }">
     <template #header>
       <div class="flex justify-between items-center">
         <h3 class="text-[22px] font-bold">访问量</h3>
         <!-- 按钮 -->
         <div class="buttons">
-          <el-button
-            :color="activeTab === 'week' ? '#2B5AED' : '#F0F0F1'"
-            size="default"
-            @click="switchData('week')">
+          <el-button :color="activeTab === 'week' ? '#2B5AED' : '#F0F0F1'" size="default" @click="switchData('week')">
             近一周</el-button
           >
-          <el-button
-            :color="activeTab === 'month' ? '#2B5AED' : '#F0F0F1'"
-            size="default"
-            @click="switchData('month')">
+          <el-button :color="activeTab === 'month' ? '#2B5AED' : '#F0F0F1'" size="default" @click="switchData('month')">
             近一月</el-button
           >
         </div>
@@ -67,9 +59,7 @@ nextTick(() => {
     </template>
     <div class="mt-4">
       <!-- 图表容器 -->
-      <div
-        ref="chartContainer"
-        class="w-full h-[248px]"></div>
+      <div ref="chartContainer" class="w-full h-[248px]"></div>
     </div>
   </el-card>
 </template>

@@ -1,5 +1,5 @@
 import { CacheEnum } from '@/enum/cacheEnum'
-import user from '@/store/user'
+// import user from '@/store/user'
 import utils from '@/utils'
 import { RouteLocationNormalizedGeneric, RouteLocationNormalizedLoadedGeneric, Router } from 'vue-router'
 

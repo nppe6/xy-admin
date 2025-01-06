@@ -1,14 +1,13 @@
-import { env } from '@/utils'
 import { RouteRecordRaw } from 'vue-router'
 
 const layouts = import.meta.glob('@/layouts/*.vue', {
   eager: true,
-  import: 'default'
+  import: 'default',
 })
 
 const views = import.meta.glob('@/views/**/*.vue', {
   eager: true,
-  import: 'default'
+  import: 'default',
 })
 
 function getRouter() {
@@ -39,7 +38,7 @@ function getRoutesModule(file: string, module: any) {
   const route = {
     path: `/${name}`,
     name: name.replace('/', '-'),
-    component: module
+    component: module,
   } as RouteRecordRaw
 
   return Object.assign(route, module?.route)

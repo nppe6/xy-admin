@@ -31,7 +31,16 @@ onBeforeUnmount(() => {
 const handleCreated = (editor: any) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
-const handleChange = (editor: any) => {
+/**
+ * 参数
+ * @param editor 
+ * 
+ * const handleChange = (editor: any) => {
+  content.value = valueHtml.value // 记录 editor 实例，重要！
+}
+ */
+
+const handleChange = () => {
   content.value = valueHtml.value // 记录 editor 实例，重要！
 }
 </script>

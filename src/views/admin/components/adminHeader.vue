@@ -1,20 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <el-card
-    shadow="hover"
-    :body-style="{ padding: '20px' }"
-    v-for="n of 4">
+  <el-card shadow="hover" :body-style="{ padding: '20px' }" v-for="n of 4">
     <template #header>
       <div class="flex justify-between items-center">
-        <span>用户数</span>
-        <el-tag
-          type="danger"
-          size="small"
-          effect="dark"
-          @close=""
-          >月</el-tag
-        >
+        <span>用户数{{ n + 1 }}</span>
+        <el-tag type="danger" size="small" effect="dark" @close="">月</el-tag>
       </div>
     </template>
     <section class="flex justify-between items-center">
