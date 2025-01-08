@@ -1,4 +1,5 @@
 import { CacheEnum } from '@/enum/cacheEnum'
+import router from '@/router'
 import store from '@/utils/store'
 import axios, { AxiosRequestConfig } from 'axios'
 
@@ -45,13 +46,18 @@ export default class Axios {
     // 添加响应拦截器
     this.instance.interceptors.response.use(
       (response) => {
-        // 2xx 范围内的状态码都会触发该函数。
-        // 对响应数据做点什么
         return response
       },
       (error) => {
-        // 超出 2xx 范围的状态码都会触发该函数。
-        // 对响应错误做点什么
+        switch (error.response.status) {
+          case 401:
+            store.remove(CacheEnum.TOKEN_NAME)
+            router.push({ name: 'login' })
+            break
+          case 422:
+            // 后台表单验证错误
+            break
+        }
         return Promise.reject(error)
       },
     )
