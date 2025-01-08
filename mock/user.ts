@@ -1,5 +1,7 @@
 // test.ts
 
+import pkg from 'mockjs'
+const { Random } = pkg
 import { MockMethod } from 'vite-plugin-mock'
 export default [
   {
@@ -28,7 +30,7 @@ export default [
         message: '请求成功！',
         type: 'success',
         data: {
-          token: '112233xiao',
+          token: Random.string(10),
         },
       }
     },

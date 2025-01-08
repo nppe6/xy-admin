@@ -4,7 +4,11 @@ import utils from '@/utils'
 const { Form, Field, ErrorMessage } = validate
 
 const Schema = validate.yup.object({
-  username: validate.yup.string().required().email().label('账号'),
+  username: validate.yup
+    .string()
+    .required()
+    .matches(/^\d{11}|.+@.+$/, '账号应是邮箱格式或是输入手机号')
+    .label('账号'),
   password: validate.yup.string().required().min(6, '密码长度最小不少于6个字符').label('密码'),
 })
 
