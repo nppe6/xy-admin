@@ -5,14 +5,21 @@ import menu from '@/store/menu'
 import user from '@/store/user'
 import utils from '@/utils'
 import { ref } from 'vue'
+import theme from '@/store/theme'
+import { ThemeEnum } from '@/enum/themeEnum'
 
 const userStore = user()
 const menuStore = menu()
+const themeStore = theme()
 let isFullScreen = ref(false)
 
 const fullScreen = () => {
   isFullScreen.value ? document.exitFullscreen() : document.documentElement.requestFullscreen()
   isFullScreen.value = !isFullScreen.value
+}
+
+const setDark = (type: ThemeEnum) => {
+  themeStore.changeThemeType(type)
 }
 </script>
 
@@ -26,7 +33,14 @@ const fullScreen = () => {
 
     <div class="flex justify-center items-center gap-4">
       <div class="flex justify-center items-center gap-4">
-        <i class="fas fa-sun text-[22px] text-gray-600 dark:text-white cursor-pointer"></i>
+        <i
+          v-if="themeStore.themeType == ThemeEnum.THEME_LIGHT"
+          class="fas fa-moon text-[22px] text-gray-600 dark:text-white cursor-pointer"
+          @click="setDark(ThemeEnum.THEME_DARK)"></i>
+        <i
+          v-else
+          class="fas fa-sun text-[22px] text-gray-600 dark:text-white cursor-pointer"
+          @click="setDark(ThemeEnum.THEME_LIGHT)"></i>
         <i
           v-if="!isFullScreen"
           class="fas fa-expand text-[22px] text-gray-600 dark:text-white cursor-pointer"

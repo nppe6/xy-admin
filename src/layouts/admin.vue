@@ -5,10 +5,12 @@ import HistoryLink from './components/historyLink.vue'
 import menu from '@/store/menu'
 import { useRoute } from 'vue-router'
 import { watch } from 'vue'
+import utils from '@/utils'
 
 const route = useRoute()
 const menuStore = menu()
 menuStore.init()
+utils.theme()
 watch(
   route,
   () => {
