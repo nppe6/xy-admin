@@ -11,12 +11,12 @@ const handleDele = (menu: IMenu) => {
 <template>
   <div
     v-show="menuStore.historyMenu.length"
-    class="history-link bg-gray-50 px-4 shadow-sm border-t border-b overflow-auto">
+    class="history-link bg-gray-50 dark:bg-[#151518] dark:border-[#52525b] px-4 shadow-sm border-t border-b overflow-auto">
     <div class="hidden my-2 md:flex gap-2 justify-start items-center">
       <div
         v-for="(menu, index) of menuStore.historyMenu"
         :key="index"
-        class="px-3 py-2 bg-white dark:bg-[#151518] rounded-md text-sm text-nowrap text-gray-800 dark:text-white"
+        class="px-3 py-2 bg-white dark:bg-[#52525b] rounded-md text-sm text-nowrap text-gray-800 dark:text-white"
         :class="{ 'text-white !bg-blue-600': $route.name == menu.route }">
         <router-link :to="{ name: menu.route }">{{ menu.title }}</router-link>
         <i

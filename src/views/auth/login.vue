@@ -5,11 +5,7 @@ const { Form, Field, ErrorMessage } = validate
 
 const Schema = validate.yup.object({
   username: validate.yup.string().required().email().label('账号'),
-  password: validate.yup
-    .string()
-    .required()
-    .min(6, '密码长度最小不少于6个字符')
-    .label('密码')
+  password: validate.yup.string().required().min(6, '密码长度最小不少于6个字符').label('密码'),
 })
 
 const onSubmit = async (values: any) => {
@@ -19,30 +15,19 @@ const onSubmit = async (values: any) => {
 
 <script lang="ts">
 export default {
-  route: { name: 'login', meta: { guest: true } }
+  route: { name: 'login', meta: { guest: true } },
 }
 </script>
 
 <template>
   <div class="login-content">
-    <Form
-      class="login-form"
-      @submit="onSubmit"
-      :validation-schema="Schema">
+    <Form class="login-form" @submit="onSubmit" :validation-schema="Schema">
       <h2 class="login-title">通用后台系统脚手架</h2>
       <div class="mt-12">
         <div class="relative">
-          <Field
-            name="username"
-            value="admin@123.com"
-            type="text"
-            placeholder="请输入邮箱账号"
-            class="login-input" />
+          <Field name="username" value="admin@123.com" type="text" placeholder="请输入邮箱账号" class="login-input" />
 
-          <ErrorMessage
-            class="text-sm text-red-800 absolute -bottom-5 left-2"
-            name="username"
-            as="div" />
+          <ErrorMessage class="text-sm text-red-800 absolute -bottom-5 left-2" name="username" as="div" />
         </div>
 
         <div class="relative">
@@ -53,10 +38,7 @@ export default {
             placeholder="请输入账号密码"
             class="login-input mt-6" />
 
-          <ErrorMessage
-            class="text-sm text-red-800 absolute -bottom-5 left-2"
-            name="password"
-            as="div" />
+          <ErrorMessage class="text-sm text-red-800 absolute -bottom-5 left-2" name="password" as="div" />
         </div>
       </div>
 
@@ -81,7 +63,7 @@ export default {
     }
 
     .login-input {
-      @apply border-none bg-[#F0F0F1] w-full py-3 pl-4 outline-none rounded-lg placeholder:text-sm;
+      @apply border-none bg-[#F0F0F1] dark:text-black w-full py-3 pl-4 outline-none rounded-lg placeholder:text-sm;
     }
 
     .login-btn {

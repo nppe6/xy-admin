@@ -96,7 +96,7 @@ const handleClick = (pmenu: IMenu, cmenu?: IMenu) => {
     @apply text-gray-900 dark:text-white h-full flex flex-col;
 
     .menu-header {
-      @apply flex-shrink-0 py-4 border-b;
+      @apply flex-shrink-0 py-4 border-b dark:border-[#52525b];
       a {
         @apply flex justify-center items-center;
 
