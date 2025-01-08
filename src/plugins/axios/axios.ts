@@ -1,3 +1,5 @@
+import { CacheEnum } from '@/enum/cacheEnum'
+import store from '@/utils/store'
 import axios, { AxiosRequestConfig } from 'axios'
 
 export default class Axios {
@@ -8,9 +10,7 @@ export default class Axios {
     this.interceptors()
   }
 
-  public request<T, D = ResponseResult<T>>(
-    config: AxiosRequestConfig
-  ): Promise<D> {
+  public request<T, D = ResponseResult<T>>(config: AxiosRequestConfig): Promise<D> {
     // this.instance.request()
     return new Promise(async (resolve, reject) => {
       try {
@@ -32,12 +32,13 @@ export default class Axios {
     this.instance.interceptors.request.use(
       (config) => {
         // 在发送请求之前做些什么
+        config.headers.Authorization = 'Bearer ' + store.get(CacheEnum.TOKEN_NAME)?.token
         return config
       },
       (error) => {
         // 对请求错误做些什么
         return Promise.reject(error)
-      }
+      },
     )
   }
   private interceptorsResponse() {
@@ -52,7 +53,7 @@ export default class Axios {
         // 超出 2xx 范围的状态码都会触发该函数。
         // 对响应错误做点什么
         return Promise.reject(error)
-      }
+      },
     )
   }
 }

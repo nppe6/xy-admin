@@ -26,5 +26,17 @@ export default ({ command, mode }: ConfigEnv) => {
         },
       },
     },
+    server: {
+      proxy: {
+        '/api': {
+          //将/api访问转换为target
+          target: env.VITE_API_URL,
+          //跨域请求携带cookie
+          changeOrigin: true,
+          //url 重写删除`/api`
+          rewrite: (path: string) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
   }
 }

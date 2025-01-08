@@ -11,7 +11,7 @@ export async function login(values: ILoginData) {
   } = await axiosLogin(values)
 
   store.set(CacheEnum.TOKEN_NAME, { token }, 1000)
-  const routeName = utils.store.get(CacheEnum.REDIRECT_ROUTER_NAME)
+  const routeName = utils.store.get(CacheEnum.REDIRECT_ROUTER_NAME) ?? 'home'
   router.push({ name: routeName })
 }
 
